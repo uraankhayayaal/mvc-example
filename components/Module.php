@@ -20,6 +20,7 @@ class Module
 		$moduleClassName = 'modules\\' . $this->module;
 		$classNme = $moduleClassName . '\\controllers\\' . ucfirst($this->controller) . "Controller";
 		$controller = new $classNme($moduleClassName, $this->action);
+
 		$controller->beforeAction();
 		$controller->run();
 		$controller->afterAction();

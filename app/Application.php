@@ -7,9 +7,12 @@ class Application
     private $config;
     private $env;
 
+    private $request;
+
     public function __construct($env = 'dev')
     {
         $this->env = $env;
+        $this->request = new \components\Request();
     }
 
     public function run($config)
