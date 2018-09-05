@@ -17,10 +17,11 @@ class Application
         $this->config = $config;
 
         $module_name = 'app';
-        $route = $_GET["r"] ? $_GET["r"] : 'app';
+        $module = $_GET["m"] ? $_GET["m"] : 'app';
+        $controler = $_GET["c"] ? $_GET["c"] : 'front';
         $action = $_GET["a"] ? $_GET["a"] : 'index';
-        if($route != null && isset($this->config['rout'][$route]))
-            $module_name = $this->config['rout'][$route];
+        if($module != null && isset($this->config['rout'][$module]))
+            $module_name = $this->config['rout'][$module];
         else
         {
             http_response_code(404);
@@ -29,7 +30,7 @@ class Application
         }
 
         $className = $module_name['class'];
-        $module = new $className('modules\\'.$route,$action);
-        $module->run();
+        $moduleClass = new $className($module,$controler,$action);
+        $moduleClass->run();
     }
 }

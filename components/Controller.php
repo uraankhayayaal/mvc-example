@@ -24,7 +24,14 @@ class Controller
 
 	public function run()
 	{
-		$this->{$this->action}();
+		if(method_exists($this,$this->action))
+		{
+			$this->{$this->action}();
+		}else{
+			http_response_code(404);
+            include('404.php');
+            die();
+        }
 	}
 
 	public function afterAction()
@@ -32,7 +39,7 @@ class Controller
 		
 	}
 
-	protected function render($view, $data)
+	protected function render($view, $data = null)
 	{
 		return $this->view->show($view, $data);
 	}

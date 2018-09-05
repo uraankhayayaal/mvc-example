@@ -7,7 +7,7 @@
 		<link rel="stylesheet" href="themes/classic/css/main.css" />
 		<noscript><link rel="stylesheet" href="themes/classic/css/noscript.css" /></noscript>
 	</head>
-	<body class="landing is-preload">
+	<body class="<?= ($module->controller == 'front' && $module->action == 'index') ? 'landing' : '' ?> is-preload">
 
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">

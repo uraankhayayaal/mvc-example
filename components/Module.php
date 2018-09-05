@@ -4,20 +4,22 @@ namespace components;
 
 class Module
 {
-	private $moduleNamespace;
-	private $defaultRoute = 'FrontController';
-	private $action = 'index';
+	public $module = 'app';
+	public $controller = 'front';
+	public $action = 'index';
 
-	public function __construct($moduleNamespace, $action)
+	public function __construct($module,$controller,$action)
     {
-        $this->moduleNamespace = $moduleNamespace;
+        $this->module = $module;
+        $this->controller = $controller;
         $this->action = $action;
     }
 	
 	public function run()
 	{
-		$classNme = $this->moduleNamespace . '\\controllers\\' . $this->defaultRoute;
-		$controller = new $classNme($this->moduleNamespace, $this->action);
+		$moduleClassName = 'modules\\' . $this->module;
+		$classNme = $moduleClassName . '\\controllers\\' . ucfirst($this->controller) . "Controller";
+		$controller = new $classNme($moduleClassName, $this->action);
 		$controller->beforeAction();
 		$controller->run();
 		$controller->afterAction();
